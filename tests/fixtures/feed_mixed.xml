@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Motorsport Mix</title>
+    <item>
+      <title>Verstappen lidera o TL1 do GP de São Paulo</title>
+      <link>https://example.com/f1/verstappen-tl1?utm_source=rss&amp;id=7#top</link>
+      <description><![CDATA[<p>Holandês foi o <b>mais rápido</b>.</p><img src="https://example.com/img/1.jpg"/>]]></description>
+      <pubDate>Wed, 04 Nov 2026 14:00:00 +0000</pubDate>
+      <category>Fórmula 1</category>
+    </item>
+    <item>
+      <title>MotoGP: Bagnaia vence em Valência</title>
+      <link>https://example.com/motogp/bagnaia</link>
+      <description>Italiano venceu.</description>
+      <pubDate>Wed, 04 Nov 2026 13:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Verstappen lidera o TL1 do GP de São Paulo</title>
+      <link>https://example.com/f1/verstappen-tl1?id=7&amp;utm_medium=x</link>
+      <pubDate>Wed, 04 Nov 2026 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>F1 news from last month</title>
+      <link>https://example.com/f1/old</link>
+      <pubDate>Mon, 05 Oct 2026 10:00:00 +0000</pubDate>
+      <media:content url="https://example.com/img/old.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Sem link</title>
+    </item>
+  </channel>
+</rss>
