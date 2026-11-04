@@ -1,0 +1,16 @@
+[project]
+name = "painel-f1"
+version = "1.0.0"
+description = "Pipeline de notícias e dados de Fórmula 1 para Supabase"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "BLE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
