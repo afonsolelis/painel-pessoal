@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel F1</title>
+  <meta name="description" content="Manchetes diárias de Fórmula 1 em português e inglês, calendário e classificação.">
+  <meta name="theme-color" content="#15151e">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; connect-src https://lwamaovuxcevsjfvtqhf.supabase.co; img-src https: data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e10600'/%3E%3Cpath d='M7 22l6-12h12l-2 4h-8l-1 2h7l-2 4h-7l-1 2z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./" aria-label="Painel F1 — início">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span>Painel <strong>F1</strong></span>
+      </a>
+      <p class="updated" id="updated" aria-live="polite">Carregando…</p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="news" aria-labelledby="news-title">
+      <div class="news__head">
+        <h1 id="news-title">Manchetes do dia</h1>
+        <div class="filters">
+          <div class="segmented" role="group" aria-label="Idioma">
+            <button type="button" data-lang="all" aria-pressed="true">Todas</button>
+            <button type="button" data-lang="pt" aria-pressed="false">Português</button>
+            <button type="button" data-lang="en" aria-pressed="false">English</button>
+          </div>
+          <label class="search">
+            <span class="visually-hidden">Buscar manchetes</span>
+            <input id="search" type="search" placeholder="Buscar piloto, equipe, GP…" autocomplete="off">
+          </label>
+        </div>
+        <div class="chips" id="sources" role="group" aria-label="Fontes"></div>
+      </div>
+
+      <p class="status" id="status" role="status"></p>
+      <div class="grid" id="news-grid" aria-busy="true"></div>
+    </section>
+
+    <aside class="sidebar" aria-label="Temporada">
+      <section class="panel" id="next-race" aria-labelledby="next-race-title">
+        <h2 id="next-race-title">Próxima corrida</h2>
+        <div class="panel__body"><div class="skeleton skeleton--block"></div></div>
+      </section>
+
+      <section class="panel" aria-labelledby="drivers-title">
+        <h2 id="drivers-title">Pilotos</h2>
+        <ol class="standings" id="drivers"><li class="skeleton skeleton--line"></li></ol>
+      </section>
+
+      <section class="panel" aria-labelledby="teams-title">
+        <h2 id="teams-title">Construtores</h2>
+        <ol class="standings" id="teams"><li class="skeleton skeleton--line"></li></ol>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="footer container">
+    <p>Dados coletados diariamente às 06h (Brasília) de portais públicos via RSS e da API Jolpica.
+       Cada manchete leva à matéria original no site da fonte.</p>
+  </footer>
+
+  <template id="card-template">
+    <article class="card">
+      <a class="card__link" target="_blank" rel="noopener noreferrer">
+        <div class="card__media"><img alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>
+        <div class="card__body">
+          <p class="card__meta"><span class="card__source"></span><span class="card__lang"></span><time class="card__time"></time></p>
+          <h3 class="card__title"></h3>
+          <p class="card__summary"></p>
+        </div>
+      </a>
+    </article>
+  </template>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js" type="module"></script>
+</body>
+</html>
