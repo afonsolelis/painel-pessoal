@@ -1,0 +1,75 @@
+# Fontes de notícias de F1 coletadas via RSS.
+# f1_only = false => o feed cobre outras categorias e passa por filtro de palavras-chave.
+
+[[source]]
+slug = "autosport"
+name = "Autosport"
+homepage = "https://www.autosport.com/f1/"
+feed_url = "https://www.autosport.com/rss/f1/news/"
+language = "en"
+
+[[source]]
+slug = "motorsport-com"
+name = "Motorsport.com"
+homepage = "https://www.motorsport.com/f1/"
+feed_url = "https://www.motorsport.com/rss/f1/news/"
+language = "en"
+
+[[source]]
+slug = "bbc-sport"
+name = "BBC Sport"
+homepage = "https://www.bbc.com/sport/formula1"
+feed_url = "https://feeds.bbci.co.uk/sport/formula1/rss.xml"
+language = "en"
+
+[[source]]
+slug = "the-race"
+name = "The Race"
+homepage = "https://www.the-race.com/formula-1/"
+feed_url = "https://www.the-race.com/rss/"
+language = "en"
+f1_only = false
+
+[[source]]
+slug = "racefans"
+name = "RaceFans"
+homepage = "https://www.racefans.net/"
+feed_url = "https://www.racefans.net/feed/"
+language = "en"
+f1_only = false
+
+[[source]]
+slug = "planetf1"
+name = "PlanetF1"
+homepage = "https://www.planetf1.com/"
+feed_url = "https://www.planetf1.com/rss"
+language = "en"
+
+[[source]]
+slug = "motorsport-br"
+name = "Motorsport.com Brasil"
+homepage = "https://motorsport.uol.com.br/f1/"
+feed_url = "https://motorsport.uol.com.br/rss/f1/news/"
+language = "pt"
+
+[[source]]
+slug = "ge-globo"
+name = "ge (Globo)"
+homepage = "https://ge.globo.com/motor/formula-1/"
+feed_url = "https://ge.globo.com/rss/ge/motor/formula-1/"
+language = "pt"
+
+[[source]]
+slug = "grande-premio"
+name = "Grande Prêmio"
+homepage = "https://grandepremio.com/br/f1/"
+feed_url = "https://grandepremio.com/br/f1/feed/"
+language = "pt"
+
+[[source]]
+slug = "autoracing"
+name = "Autoracing"
+homepage = "https://www.autoracing.com.br/"
+feed_url = "https://www.autoracing.com.br/feed/"
+language = "pt"
+f1_only = false
