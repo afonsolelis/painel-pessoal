@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint e testes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: pytest
+
+  migrations:
+    name: Migrações em Postgres efêmero
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - name: Criar papéis do Supabase
+        run: psql -h localhost -U postgres -c "create role anon nologin; create role authenticated nologin;"
+      - name: Aplicar migrações duas vezes (idempotência)
+        run: |
+          python -m pipeline --migrate-only
+          python -m pipeline --migrate-only
+          psql -h localhost -U postgres -v ON_ERROR_STOP=1 -f db/migrations/001_initial_schema.sql
+      - name: Validar permissões do papel anon
+        run: |
+          psql -h localhost -U postgres -v ON_ERROR_STOP=1 -c "set role anon; select count(*) from f1_news_feed;"
+          if psql -h localhost -U postgres -c "set role anon; insert into f1_sources (slug,name,homepage,feed_url,language) values ('x','x','x','x','pt');" 2>/dev/null; then
+            echo "::error::anon não deveria conseguir escrever"; exit 1
+          fi
