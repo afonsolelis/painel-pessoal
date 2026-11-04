@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/deploy-pages.yml"]
+    paths: ["index.html", "assets/**", ".github/workflows/deploy-pages.yml"]
   workflow_dispatch:
 
 permissions:
@@ -25,8 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Montar artefato só com os arquivos do site
+        run: |
+          mkdir -p _site
+          cp -r index.html assets .nojekyll _site/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

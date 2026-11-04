@@ -17,7 +17,7 @@ GitHub Actions (06h BRT) ──► pipeline Python ──► Supabase Postgres �
 | `pipeline/` | Coletor: RSS (`news.py`), calendário/classificação (`f1data.py`), banco (`db.py`) |
 | `pipeline/sources.toml` | Catálogo de fontes — adicione uma fonte sem mexer em código |
 | `db/migrations/` | Schema versionado (idempotente) |
-| `site/` | Front-end estático publicado no GitHub Pages |
+| `index.html`, `assets/` | Front-end estático publicado no GitHub Pages |
 | `.github/workflows/` | `collect-f1-data.yml` (diário), `ci.yml` (lint/testes/migrações), `deploy-pages.yml` |
 | `docs/data-model.md` | Modelo de dados (diagrama ER) e decisões |
 
@@ -35,7 +35,8 @@ Artigos sem imagem no RSS recebem a `og:image` da página (limitado por execuç�
 1. **Segredo do banco**: *Settings → Secrets and variables → Actions → New repository secret*
    - Nome: `DATABASE_URL`
    - Valor: a connection string do Supabase (pooler, porta 6543)
-2. **GitHub Pages**: *Settings → Pages → Build and deployment → Source: **GitHub Actions***.
+2. **GitHub Pages**: *Settings → Pages*. Funciona com **Deploy from a branch** (`main`, `/ (root)`)
+   ou com **GitHub Actions** (publica só `index.html` e `assets/`).
 3. **Primeira carga**: *Actions → Coleta diária de F1 → Run workflow*.
 
 A partir daí a coleta roda todo dia às 06h (09:00 UTC).
@@ -48,7 +49,7 @@ pip install -r requirements-dev.txt
 ruff check . && pytest
 DATABASE_URL="postgresql://..." python -m pipeline        # coleta completa
 DATABASE_URL="postgresql://..." python -m pipeline --migrate-only
-python -m http.server -d site 8000                       # front-end em http://localhost:8000
+python -m http.server 8000                       # front-end em http://localhost:8000
 ```
 
 Variáveis opcionais: `MAX_ARTICLES_PER_SOURCE` (40), `MAX_ARTICLE_AGE_DAYS` (7),
